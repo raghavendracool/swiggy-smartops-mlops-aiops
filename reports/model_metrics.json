@@ -1,0 +1,12 @@
+{
+    "model_name": "RandomForestClassifier",
+    "use_case": "Delivery Delay Prediction",
+    "target_column": "delay_flag",
+    "accuracy": 0.7252,
+    "precision": 0.5153,
+    "recall": 0.3282,
+    "f1_score": 0.401,
+    "training_rows": 126720,
+    "testing_rows": 31680,
+    "features_count": 194
+}
