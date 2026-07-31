@@ -1,0 +1,14 @@
+{
+    "total_customers": 5902,
+    "high_churn_customers": 281,
+    "medium_churn_customers": 388,
+    "low_churn_customers": 5233,
+    "total_revenue_at_risk": 709585.0,
+    "customers_needing_coupon": 2210,
+    "critical_restaurants": 60,
+    "medium_risk_restaurants": 0,
+    "critical_areas": 0,
+    "medium_risk_areas": 15,
+    "latest_month": "2025-12",
+    "previous_month": "2025-11"
+}

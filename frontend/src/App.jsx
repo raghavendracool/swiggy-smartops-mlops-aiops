@@ -1340,6 +1340,26 @@ function OrderSuccessPage({ orderResult, startAgain, viewAdmin }) {
           {Number(orderResult.delay_probability || 0).toFixed(2)}
         </h3>
 
+        <div className="priority-row">
+          <span
+            className={
+              orderResult.priority_level === "Critical"
+                ? "priority-badge priority-critical"
+                : orderResult.priority_level === "High"
+                ? "priority-badge priority-high"
+                : orderResult.priority_level === "Medium"
+                ? "priority-badge priority-medium"
+                : "priority-badge priority-low"
+            }
+          >
+            {orderResult.priority_level || "Low"} Priority
+          </span>
+
+          <span className="scenario-chip">
+            {orderResult.business_scenario || orderResult.operational_scenario}
+          </span>
+        </div>
+
         <div className="insight-grid">
           <div>
             <span>Receiver</span>
@@ -1392,6 +1412,25 @@ function OrderSuccessPage({ orderResult, startAgain, viewAdmin }) {
           </div>
         </div>
 
+        <div className="business-decision-card">
+          <h3>Business Decision Engine</h3>
+
+          <div className="business-row">
+            <span>Why this order needs attention</span>
+            <strong>{orderResult.business_reason || "No major risk detected."}</strong>
+          </div>
+
+          <div className="business-row">
+            <span>Recommended business action</span>
+            <strong>{orderResult.business_action || orderResult.recommendation}</strong>
+          </div>
+
+          <div className="business-row">
+            <span>Business impact</span>
+            <strong>{orderResult.business_impact || "Maintains stable operations."}</strong>
+          </div>
+        </div>
+
         <div className="recommendation">
           <strong>Recommendation:</strong> {orderResult.recommendation}
         </div>
@@ -1402,7 +1441,7 @@ function OrderSuccessPage({ orderResult, startAgain, viewAdmin }) {
           </button>
 
           <button className="outline-btn" onClick={viewAdmin}>
-            View Admin Dashboard
+            View MLOps Dashboard
           </button>
         </div>
       </section>
@@ -1411,59 +1450,287 @@ function OrderSuccessPage({ orderResult, startAgain, viewAdmin }) {
 }
 
 function AdminPage({ adminOrders, back }) {
+  const [activeTab, setActiveTab] = useState("overview");
+  const [mlopsSummary, setMlopsSummary] = useState(null);
+  const [retentionCustomers, setRetentionCustomers] = useState([]);
+  const [couponRecommendations, setCouponRecommendations] = useState([]);
+  const [restaurantRisk, setRestaurantRisk] = useState([]);
+  const [areaRisk, setAreaRisk] = useState([]);
+
+  async function loadMlopsDashboard() {
+    try {
+      const summary = await apiRequest("/admin/mlops/summary");
+      const retention = await apiRequest("/admin/mlops/customer-retention?limit=50");
+      const coupons = await apiRequest("/admin/mlops/coupon-recommendations?limit=50");
+      const restaurants = await apiRequest("/admin/mlops/restaurant-risk?limit=50");
+      const areas = await apiRequest("/admin/mlops/area-risk?limit=50");
+
+      setMlopsSummary(summary);
+      setRetentionCustomers(retention);
+      setCouponRecommendations(coupons);
+      setRestaurantRisk(restaurants);
+      setAreaRisk(areas);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    loadMlopsDashboard();
+  }, []);
+
+  const live = mlopsSummary?.live_orders || {};
+  const offline = mlopsSummary?.offline_business_summary || {};
+
   return (
-    <main className="page">
+    <main className="page admin-page">
       <button className="text-btn" onClick={back}>
         ← Back to restaurants
       </button>
 
       <section className="page-title">
-        <h2>Admin - Live Orders & ML Predictions</h2>
-        <p>Orders with weather, distance, scenario and model v2 prediction.</p>
+        <h2>📊 Swiggy SmartOps MLOps Dashboard</h2>
+        <p>
+          Business dashboard for live delay risk, customer churn, smart coupons,
+          restaurant risk, and area operations.
+        </p>
       </section>
+
+      <section className="admin-kpi-grid">
+        <KpiCard title="Live Orders" value={live.total_live_orders || 0} subtitle="Orders scored by FastAPI model" />
+        <KpiCard title="High Risk Orders" value={live.high_risk_orders || 0} subtitle="Delay risk predicted by model v2" danger />
+        <KpiCard title="Revenue at Risk" value={`₹${Number(live.revenue_at_risk || 0).toFixed(0)}`} subtitle="Live revenue exposed to delay risk" />
+        <KpiCard title="Avg Delay Probability" value={Number(live.avg_delay_probability || 0).toFixed(2)} subtitle="Average live prediction probability" />
+        <KpiCard title="High Churn Customers" value={offline.high_churn_customers || 0} subtitle="Customers with order drop risk" danger />
+        <KpiCard title="Coupon Candidates" value={offline.customers_needing_coupon || 0} subtitle="Customers needing retention campaign" />
+        <KpiCard title="Revenue Retention Risk" value={`₹${Number(offline.total_revenue_at_risk || 0).toFixed(0)}`} subtitle="Revenue from churn-risk customers" danger />
+        <KpiCard title="Critical Restaurants" value={offline.critical_restaurants || 0} subtitle="Restaurant ops risk detected" />
+      </section>
+
+      <section className="admin-tabs">
+        <button
+          className={activeTab === "overview" ? "active-admin-tab" : ""}
+          onClick={() => setActiveTab("overview")}
+        >
+          Live Orders
+        </button>
+
+        <button
+          className={activeTab === "retention" ? "active-admin-tab" : ""}
+          onClick={() => setActiveTab("retention")}
+        >
+          Customer Retention
+        </button>
+
+        <button
+          className={activeTab === "coupons" ? "active-admin-tab" : ""}
+          onClick={() => setActiveTab("coupons")}
+        >
+          Coupon Engine
+        </button>
+
+        <button
+          className={activeTab === "restaurants" ? "active-admin-tab" : ""}
+          onClick={() => setActiveTab("restaurants")}
+        >
+          Restaurant Ops
+        </button>
+
+        <button
+          className={activeTab === "areas" ? "active-admin-tab" : ""}
+          onClick={() => setActiveTab("areas")}
+        >
+          Area Ops
+        </button>
+      </section>
+
+      {activeTab === "overview" && (
+        <DashboardTable
+          title="Live Orders & Delay Risk Predictions"
+          columns={[
+            "Order",
+            "Receiver",
+            "Type",
+            "Customer Area",
+            "Restaurant",
+            "Distance",
+            "Weather",
+            "Scenario",
+            "Priority",
+            "Risk",
+            "Probability"
+          ]}
+          rows={adminOrders.map((order) => [
+            order.order_id,
+            order.receiver_name,
+            order.receiver_type,
+            order.customer_area,
+            order.restaurant_location_name,
+            `${order.distance_km} km`,
+            order.weather_condition,
+            order.business_scenario || order.operational_scenario,
+            order.priority_level || "-",
+            order.delay_risk,
+            order.delay_probability
+              ? Number(order.delay_probability).toFixed(2)
+              : "-"
+          ])}
+        />
+      )}
+
+      {activeTab === "retention" && (
+        <DashboardTable
+          title="Customer Order Drop / Churn Risk"
+          columns={[
+            "Customer",
+            "Segment",
+            "Prev Orders",
+            "Current Orders",
+            "Drop %",
+            "Prev Revenue",
+            "Current Revenue",
+            "Risk",
+            "Revenue at Risk"
+          ]}
+          rows={retentionCustomers.map((customer) => [
+            customer.customer_id,
+            customer.customer_segment,
+            customer.previous_monthly_orders,
+            customer.current_monthly_orders,
+            `${Number(customer.order_drop_pct || 0).toFixed(2)}`,
+            `₹${Number(customer.previous_monthly_revenue || 0).toFixed(0)}`,
+            `₹${Number(customer.current_monthly_revenue || 0).toFixed(0)}`,
+            customer.churn_risk_label,
+            `₹${Number(customer.revenue_at_risk || 0).toFixed(0)}`
+          ])}
+        />
+      )}
+
+      {activeTab === "coupons" && (
+        <DashboardTable
+          title="Smart Coupon Recommendations"
+          columns={[
+            "Customer",
+            "Segment",
+            "Risk",
+            "Recommended Coupon",
+            "Reason",
+            "Business Action",
+            "Revenue at Risk"
+          ]}
+          rows={couponRecommendations.map((customer) => [
+            customer.customer_id,
+            customer.customer_segment,
+            customer.churn_risk_label,
+            customer.recommended_coupon,
+            customer.coupon_reason,
+            customer.business_action,
+            `₹${Number(customer.revenue_at_risk || 0).toFixed(0)}`
+          ])}
+        />
+      )}
+
+      {activeTab === "restaurants" && (
+        <DashboardTable
+          title="Restaurant Operations Risk"
+          columns={[
+            "Restaurant",
+            "Area",
+            "Orders",
+            "Delay %",
+            "Avg Delivery",
+            "Rating",
+            "Priority",
+            "Action"
+          ]}
+          rows={restaurantRisk.map((restaurant) => [
+            restaurant.restaurant_location_name || restaurant.assigned_nearby_restaurant_name,
+            restaurant.restaurant_area,
+            restaurant.total_orders,
+            `${restaurant.delay_rate_pct}%`,
+            `${restaurant.avg_delivery_minutes} mins`,
+            restaurant.avg_rating,
+            restaurant.restaurant_priority,
+            restaurant.business_action
+          ])}
+        />
+      )}
+
+      {activeTab === "areas" && (
+        <DashboardTable
+          title="Area Operations Risk"
+          columns={[
+            "City",
+            "Area",
+            "Orders",
+            "Delay %",
+            "Rain %",
+            "Avg Distance",
+            "Priority",
+            "Action"
+          ]}
+          rows={areaRisk.map((area) => [
+            area.city_clean,
+            area.customer_area,
+            area.total_orders,
+            `${area.delay_rate_pct}%`,
+            `${area.rain_order_pct}%`,
+            `${area.avg_distance_km} km`,
+            area.area_priority,
+            area.business_action
+          ])}
+        />
+      )}
+    </main>
+  );
+}
+
+function KpiCard({ title, value, subtitle, danger }) {
+  return (
+    <div className={danger ? "kpi-card danger-kpi" : "kpi-card"}>
+      <span>{title}</span>
+      <strong>{value}</strong>
+      <p>{subtitle}</p>
+    </div>
+  );
+}
+
+function DashboardTable({ title, columns, rows }) {
+  return (
+    <section className="dashboard-section">
+      <div className="dashboard-section-header">
+        <h3>{title}</h3>
+        <span>{rows.length} records</span>
+      </div>
 
       <div className="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>Order</th>
-              <th>User</th>
-              <th>Receiver</th>
-              <th>Type</th>
-              <th>Customer Area</th>
-              <th>Restaurant</th>
-              <th>Distance</th>
-              <th>Weather</th>
-              <th>Scenario</th>
-              <th>Risk</th>
-              <th>Probability</th>
+              {columns.map((column) => (
+                <th key={column}>{column}</th>
+              ))}
             </tr>
           </thead>
 
           <tbody>
-            {adminOrders.map((order) => (
-              <tr key={order.order_id}>
-                <td>{order.order_id}</td>
-                <td>{order.user_id}</td>
-                <td>{order.receiver_name}</td>
-                <td>{order.receiver_type}</td>
-                <td>{order.customer_area}</td>
-                <td>{order.restaurant_location_name}</td>
-                <td>{order.distance_km} km</td>
-                <td>{order.weather_condition}</td>
-                <td>{order.operational_scenario}</td>
-                <td>{order.delay_risk}</td>
-                <td>
-                  {order.delay_probability
-                    ? Number(order.delay_probability).toFixed(2)
-                    : "-"}
-                </td>
+            {rows.length === 0 && (
+              <tr>
+                <td colSpan={columns.length}>No records found.</td>
+              </tr>
+            )}
+
+            {rows.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <td key={cellIndex}>{cell}</td>
+                ))}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </main>
+    </section>
   );
 }
 

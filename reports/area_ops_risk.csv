@@ -1,0 +1,16 @@
+city_clean,customer_area,total_orders,total_revenue,delayed_orders,rain_orders,surge_orders,avg_delivery_minutes,avg_distance_km,avg_rating,delay_rate_pct,rain_order_pct,area_priority,business_action
+Bengaluru,Banaswadi,15939,3631196,4946,2869,3611,35.27,8.24,1.1,31.03,18.0,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Bengaluru,Koramangala,15765,3584171,4918,2864,3655,35.22,8.8,1.12,31.2,18.17,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Bengaluru,Malleshwaram,15568,3528822,4796,2789,3567,35.11,11.48,1.12,30.81,17.91,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Bengaluru,Marathahalli,7966,1801948,2443,1423,1822,35.05,8.24,1.14,30.67,17.86,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Bengaluru,Whitefield,23643,5403969,7313,4274,5386,35.2,10.18,1.09,30.93,18.08,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Abids,7784,1704050,2014,1367,1805,33.33,7.64,1.11,25.87,17.56,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Ameerpet,8167,1797898,2048,1463,1894,33.05,5.93,1.08,25.08,17.91,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Banjara Hills,7868,1748181,1983,1384,1760,33.11,6.08,1.1,25.2,17.59,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Gachibowli,7957,1750337,2024,1472,1764,33.15,10.43,1.1,25.44,18.5,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Khairatabad,8001,1768087,2023,1406,1853,33.32,6.32,1.13,25.28,17.57,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Kukatpally,8002,1740472,2018,1500,1823,33.33,9.41,1.13,25.22,18.75,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Madhapur,7982,1768501,1953,1456,1872,33.17,7.5,1.08,24.47,18.24,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Moosapet,7874,1711785,1911,1475,1730,32.96,7.01,1.09,24.27,18.73,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,New Maruthi Nagar,7899,1758979,1986,1387,1816,33.08,11.62,1.12,25.14,17.56,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.
+Hyderabad,Secunderabad,7985,1760601,2021,1359,1810,33.22,8.2,1.09,25.31,17.02,Medium Area Ops Risk,Monitor distance-heavy orders and adjust ETA.

@@ -4,13 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.app.config import BACKEND_TITLE, BACKEND_VERSION
 from backend.app.database import Base, SessionLocal, engine
 
-# Important: import models so Base.metadata knows all tables
 from backend.app import models
 
 from backend.app.routes import (
     address_routes,
     admin_routes,
     auth_routes,
+    mlops_routes,
     order_routes,
     restaurant_routes,
 )
@@ -18,7 +18,7 @@ from backend.app.seed_data import seed_master_data
 
 app = FastAPI(
     title=BACKEND_TITLE,
-    description="Swiggy SmartOps backend with model v2, location, weather, distance, and address book",
+    description="Swiggy SmartOps backend with model v2, MLOps dashboard, location, weather, distance, customer retention, and coupon intelligence",
     version=BACKEND_VERSION,
 )
 
@@ -57,6 +57,12 @@ def health():
             "order for someone else",
             "weather API",
             "distance calculation",
+            "business scenario engine",
+            "customer retention dashboard",
+            "coupon recommendation dashboard",
+            "restaurant operations risk",
+            "area operations risk",
+            "MLOps business dashboard",
         ],
     }
 
@@ -66,3 +72,4 @@ app.include_router(address_routes.router)
 app.include_router(restaurant_routes.router)
 app.include_router(order_routes.router)
 app.include_router(admin_routes.router)
+app.include_router(mlops_routes.router)

@@ -1,0 +1,39 @@
+{
+    "model_name": "swiggy_customer_churn_model_v1",
+    "rows_used": 5902,
+    "features_used": 25,
+    "accuracy": 0.9983,
+    "precision": 0.9655,
+    "recall": 1.0,
+    "f1_score": 0.9825,
+    "roc_auc": 1.0,
+    "numeric_features": [
+        "previous_monthly_orders",
+        "current_monthly_orders",
+        "order_drop_count",
+        "order_drop_pct",
+        "previous_monthly_revenue",
+        "current_monthly_revenue",
+        "revenue_drop_pct",
+        "previous_avg_order_value",
+        "current_avg_order_value",
+        "previous_coupon_usage_rate",
+        "current_coupon_usage_rate",
+        "previous_delay_rate",
+        "current_delay_rate",
+        "previous_avg_delivery_minutes",
+        "current_avg_delivery_minutes",
+        "previous_avg_distance_km",
+        "current_avg_distance_km",
+        "previous_avg_rating",
+        "current_avg_rating",
+        "high_value_customer_flag",
+        "bad_experience_flag",
+        "coupon_sensitive_flag"
+    ],
+    "categorical_features": [
+        "city",
+        "customer_area",
+        "membership_tier"
+    ]
+}

@@ -6,6 +6,8 @@ from backend.app.config import FEATURES_PATH, MODEL_PATH, MODEL_VERSION
 model = joblib.load(MODEL_PATH)
 model_features = joblib.load(FEATURES_PATH)
 
+DELAY_RISK_THRESHOLD = 0.65
+
 
 def predict_delay(ml_input: dict):
     input_df = pd.DataFrame([ml_input])
@@ -15,12 +17,13 @@ def predict_delay(ml_input: dict):
         fill_value=None
     )
 
-    prediction = int(model.predict(input_df)[0])
-
     if hasattr(model, "predict_proba"):
         probability = float(model.predict_proba(input_df)[0][1])
     else:
-        probability = 0.0
+        raw_prediction = int(model.predict(input_df)[0])
+        probability = 1.0 if raw_prediction == 1 else 0.0
+
+    prediction = 1 if probability >= DELAY_RISK_THRESHOLD else 0
 
     delay_risk = "High Delay Risk" if prediction == 1 else "Low Delay Risk"
 
@@ -36,4 +39,5 @@ def predict_delay(ml_input: dict):
         "delay_probability": probability,
         "delay_risk": delay_risk,
         "recommendation": recommendation,
+        "risk_threshold": DELAY_RISK_THRESHOLD,
     }

@@ -20,6 +20,7 @@ from backend.app.services.distance_service import (
 )
 from backend.app.services.location_service import reverse_geocode_location
 from backend.app.services.ml_service import predict_delay
+from backend.app.services.scenario_service import evaluate_order_business_scenario
 from backend.app.services.weather_service import fetch_weather
 
 router = APIRouter(prefix="", tags=["Orders"])
@@ -40,8 +41,6 @@ def create_order(request: OrderRequest, db: Session = Depends(get_db)):
 
     if product is None:
         raise HTTPException(status_code=404, detail="Product not found")
-
-    selected_address = None
 
     if request.address_id is not None:
         selected_address = db.query(CustomerAddress).filter(
@@ -179,7 +178,20 @@ def create_order(request: OrderRequest, db: Session = Depends(get_db)):
 
     prediction_result = predict_delay(ml_input)
 
-    recommendation = prediction_result["recommendation"]
+    business_context = evaluate_order_business_scenario(
+        delay_probability=prediction_result["delay_probability"],
+        delay_risk=prediction_result["delay_risk"],
+        distance_km=distance_km,
+        raining_num=automatic_raining_num,
+        surge_num=request.surge_num,
+        net_amount=net_amount,
+        order_for_someone_else_flag=order_for_someone_else_flag,
+        weather_api_status=weather["weather_api_status"],
+        operational_scenario=operational_scenario,
+        estimated_travel_minutes=estimated_travel_minutes,
+    )
+
+    recommendation = business_context["business_action"]
 
     if automatic_raining_num == 1:
         recommendation += " | Weather impact detected."
@@ -299,6 +311,13 @@ def create_order(request: OrderRequest, db: Session = Depends(get_db)):
         "delay_prediction": prediction_result["delay_prediction"],
         "delay_risk": prediction_result["delay_risk"],
         "delay_probability": prediction_result["delay_probability"],
+
+        "priority_level": business_context["priority_level"],
+        "business_scenario": business_context["business_scenario"],
+        "business_reason": business_context["business_reason"],
+        "business_action": business_context["business_action"],
+        "business_impact": business_context["business_impact"],
+
         "recommendation": recommendation,
     }
 
@@ -346,6 +365,19 @@ def get_operational_scenario(
 
 
 def order_to_dict(order: Order, prediction: OrderPrediction | None):
+    business_context = evaluate_order_business_scenario(
+        delay_probability=prediction.delay_probability if prediction else 0,
+        delay_risk=prediction.delay_risk if prediction else "Low Delay Risk",
+        distance_km=order.distance_km,
+        raining_num=order.raining_num,
+        surge_num=order.surge_num,
+        net_amount=order.net_amount,
+        order_for_someone_else_flag=1 if order.receiver_type != "Self" else 0,
+        weather_api_status="success",
+        operational_scenario=order.operational_scenario,
+        estimated_travel_minutes=order.estimated_travel_minutes
+    )
+
     return {
         "order_id": order.order_id,
         "user_id": order.user_id,
@@ -373,6 +405,13 @@ def order_to_dict(order: Order, prediction: OrderPrediction | None):
         "model_version": prediction.model_version if prediction else None,
         "delay_risk": prediction.delay_risk if prediction else None,
         "delay_probability": prediction.delay_probability if prediction else None,
+
+        "priority_level": business_context["priority_level"],
+        "business_scenario": business_context["business_scenario"],
+        "business_reason": business_context["business_reason"],
+        "business_action": business_context["business_action"],
+        "business_impact": business_context["business_impact"],
+
         "recommendation": prediction.recommendation if prediction else None,
         "created_at": order.created_at,
     }
