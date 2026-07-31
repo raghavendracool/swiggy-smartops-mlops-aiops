@@ -1,0 +1,200 @@
+feature,importance
+surge_num,0.27399357211496916
+precipitation_mm,0.0487133842679277
+auto_raining_flag,0.043357366726257486
+estimated_travel_minutes,0.041865852070587
+temperature,0.04107975143330348
+weather_condition_Rain / Drizzle,0.03875833627731244
+customer_latitude,0.03293692505777077
+customer_longitude,0.03018385341155341
+weather_condition_Clear / Normal,0.02914603773488465
+distance_km,0.02899382731565672
+raining_num,0.027679536301936796
+wind_speed,0.025661888047126265
+net_amount,0.025022609578763264
+gross_amount,0.02345038066240906
+order_month,0.016445114214259846
+operational_scenario_Rain + Long Distance + Surge,0.015452493669849361
+order_dayofweek,0.013155721674131078
+rating,0.01294557849627565
+restaurant_latitude,0.011621989680662177
+restaurant_longitude,0.011323009066557725
+weather_severity_Light Rain,0.010572913410608896
+total_discount_amount,0.009391446412059754
+operational_scenario_Normal Order,0.009184273882171466
+weather_severity_Clear,0.009150395184779949
+quantity,0.006412925555495083
+operational_scenario_Non-rain + Long Distance,0.00533642566061367
+weather_severity_Moderate Rain,0.0050861936916796364
+membership_benefit_amount,0.005057198498540972
+coupon_discount_amount,0.004925026162165215
+weather_severity_Partly Cloudy,0.00457459389746091
+operational_scenario_Rain + Nearby,0.0038022311503089195
+device_type_ANDROID,0.0035091874008255134
+device_type_IOS,0.0034155955846716488
+membership_tier_NONE,0.003312417058385806
+operational_scenario_Surge + Medium/Far Distance,0.002892071368225028
+coupon_used_num,0.0028800861389784767
+coupon_name_No Coupon,0.0027355473805996894
+membership_tier_ONE_LITE,0.0026889231106694994
+distance_bucket_Far,0.0026640745153117835
+weather_severity_Cloudy,0.00260375641433194
+membership_tier_ONE,0.002499432918032864
+city_clean_Bengaluru,0.0024818381121086757
+campaign_name_No Campaign,0.002353751887471999
+objective_NONE,0.002347224214770868
+channel_NONE,0.0023128671098155934
+campaign_exposed_num,0.002258195255315934
+distance_bucket_Medium,0.002018765565020358
+distance_bucket_Very Far,0.0019615573424602143
+distance_bucket_Near,0.0019140291982095178
+city_clean_Hyderabad,0.0016688342289858753
+assigned_restaurant_cuisine_Chinese,0.001620083166675162
+objective_COUPON_ADOPTION,0.0014670173519055363
+objective_ACQUISITION,0.0014286886945260387
+assigned_restaurant_cuisine_South Indian,0.0014241981496462446
+device_type_WEB,0.001406566206500567
+objective_INCREASE_ORDERS,0.0014036692231860549
+objective_REACTIVATION,0.0014013875461323779
+channel_INAPP_POPUP,0.0013997268925126651
+assigned_restaurant_cuisine_Hyderabadi,0.0013877397256558076
+campaign_name_Push: Lunch Deals,0.0013852887738972555
+coupon_name_Payday 15% (cap 120),0.001384648866469249
+campaign_name_In-app Popup: 20% Off,0.0013605445020906648
+coupon_name_Flat 80 off,0.0013571788058870707
+coupon_name_Weekend 20% (cap 100),0.0013140980448640067
+assigned_restaurant_cuisine_Desserts,0.0013095228245547043
+channel_EMAIL,0.0012985962833149158
+channel_PUSH,0.0012894180823648264
+coupon_name_Welcome 50% (cap 150),0.0012814512579942666
+coupon_name_Free Delivery (flat 40),0.0012777879458437478
+assigned_restaurant_cuisine_Andhra,0.0012662114509929365
+channel_PAID_MEDIA,0.0012411825579587482
+membership_tier_ONE_PLUS,0.001241105227460806
+campaign_name_Paid Ads: New Users,0.0012199843334668471
+campaign_name_Email: Weekend Special,0.0012163178887090028
+delivery_success_num,0.0011324909600203407
+assigned_restaurant_cuisine_Continental,0.0011106875794423107
+customer_zone_Central Hyderabad,0.0010357849387144112
+weather_severity_Heavy Rain,0.000974771440285177
+customer_zone_East Bengaluru,0.0009598098079169975
+customer_zone_West Hyderabad,0.0007416731519292854
+restaurant_area_Whitefield,0.0007315667391391403
+assigned_nearby_restaurant_name_Smoor,0.0007192724079090092
+customer_zone_North West Hyderabad,0.0006972601896193476
+customer_area_Whitefield,0.0006964307597362107
+assigned_nearby_restaurant_name_Paradise,0.000674315446701449
+assigned_nearby_restaurant_name_Chutneys,0.0006655191287793985
+assigned_nearby_restaurant_name_Nagarjuna,0.0006616436195294954
+restaurant_area_Moosapet,0.0006449171421231151
+restaurant_area_Koramangala,0.000607870123475021
+assigned_nearby_restaurant_name_Empire Restaurant,0.0006056654856334392
+assigned_nearby_restaurant_name_Karachi Bakery Cafe,0.0005878659173701512
+customer_area_Khairatabad,0.0005877268840740339
+assigned_nearby_restaurant_name_Cream Stone,0.0005818702057353544
+customer_area_Moosapet,0.0005796359582742653
+assigned_nearby_restaurant_name_Shah Ghouse,0.0005749288897374496
+assigned_nearby_restaurant_name_Corner House,0.0005687808968757762
+assigned_nearby_restaurant_name_Meridian,0.0005635069049609258
+assigned_restaurant_cuisine_Bakery,0.0005607380245090504
+assigned_nearby_restaurant_name_Ram Ki Bandi,0.0005595333069924782
+assigned_restaurant_cuisine_North Indian,0.0005558142964214341
+restaurant_area_Banaswadi,0.0005544544600008864
+assigned_nearby_restaurant_name_Bawarchi,0.0005522433947627327
+assigned_nearby_restaurant_name_CTR (Central Tiffin Room),0.0005518171628143875
+customer_zone_South Bengaluru,0.000543569927930733
+assigned_nearby_restaurant_name_Mehfil,0.0005419226558816961
+assigned_nearby_restaurant_name_Truffles,0.000533281968629164
+customer_zone_North East Bengaluru,0.0005331020584507794
+customer_area_Ameerpet,0.0005314968961902701
+assigned_nearby_restaurant_name_MTR,0.0005302781309827562
+assigned_nearby_restaurant_name_CTR,0.0005275982855438787
+assigned_nearby_restaurant_name_Pista House,0.0005257598251101672
+customer_area_Koramangala,0.00052348042744364
+customer_area_Malleshwaram,0.0004964084258540475
+customer_area_Banjara Hills,0.0004929757002798244
+customer_area_Madhapur,0.0004928473756288665
+customer_area_Banaswadi,0.0004904907372333426
+restaurant_area_Madhapur,0.0004814461188579712
+restaurant_area_Khairatabad,0.0004795598181170691
+restaurant_area_Secunderabad,0.00047564279059319884
+assigned_nearby_restaurant_name_Vidyarthi Bhavan,0.00046757120754778686
+customer_area_Abids,0.0004599907478069839
+restaurant_area_Gachibowli,0.0004487462262335243
+customer_area_Kukatpally,0.00044193647942567335
+assigned_nearby_restaurant_name_Meghana Foods,0.0004330205403364235
+assigned_nearby_restaurant_name_Udupi Sri Krishna Bhavan,0.00043181054311176853
+restaurant_area_Ameerpet,0.0004290712582816043
+customer_area_Gachibowli,0.0004250424097911268
+restaurant_area_Banjara Hills,0.000424110198289573
+restaurant_location_name_CTR (Central Tiffin Room) - Banaswadi,0.00041476554119868975
+restaurant_area_Malleshwaram,0.0004138483379978123
+customer_area_New Maruthi Nagar,0.0004131162155985042
+customer_area_Marathahalli,0.0004048240503364353
+restaurant_location_name_Nagarjuna - Whitefield,0.00040426229831768545
+restaurant_area_Kukatpally,0.00040332590525381994
+restaurant_area_Marathahalli,0.0003952020185900529
+restaurant_area_Abids,0.0003930622596965905
+customer_area_Secunderabad,0.00039055501150648175
+customer_zone_North Bengaluru,0.0003899039049003001
+restaurant_location_name_Karachi Bakery Cafe - Madhapur,0.00038693243312284476
+customer_zone_East Hyderabad,0.0003846134693197987
+restaurant_location_name_CTR - Whitefield,0.00037204722890121447
+customer_zone_North Hyderabad,0.00035952351079412715
+restaurant_location_name_Nagarjuna - Banaswadi,0.0003545722667364983
+restaurant_location_name_Meridian - Moosapet,0.00035336513134963957
+restaurant_area_New Maruthi Nagar,0.000348205306118796
+restaurant_location_name_Cream Stone - Khairatabad,0.00034537448768450196
+restaurant_location_name_MTR - Malleshwaram,0.0003433642199702814
+restaurant_location_name_Smoor - Whitefield,0.0003432546055878397
+restaurant_location_name_Empire Restaurant - Whitefield,0.0003416822812453777
+restaurant_location_name_Udupi Sri Krishna Bhavan - Koramangala,0.00034103663868703503
+restaurant_location_name_Pista House - New Maruthi Nagar,0.00033699811980736577
+restaurant_location_name_Bawarchi - Banjara Hills,0.00033312972038735306
+restaurant_location_name_Chutneys - Moosapet,0.00033143034750983397
+restaurant_location_name_Mehfil - Banjara Hills,0.0003290384467710217
+restaurant_location_name_Truffles - Whitefield,0.0003255755620877436
+restaurant_location_name_CTR (Central Tiffin Room) - Koramangala,0.0003240581677797197
+restaurant_location_name_Paradise - Abids,0.0003231508360830344
+restaurant_location_name_Meghana Foods - Malleshwaram,0.0003215662244873798
+restaurant_location_name_Meridian - Kukatpally,0.00032150929323679334
+restaurant_location_name_Ram Ki Bandi - Madhapur,0.00032073374194993863
+restaurant_location_name_Empire Restaurant - Banaswadi,0.0003185622966869228
+restaurant_location_name_Smoor - Koramangala,0.0003177952807517465
+restaurant_location_name_Ram Ki Bandi - Moosapet,0.00031292407269774736
+restaurant_location_name_Shah Ghouse - New Maruthi Nagar,0.00031086244144418597
+restaurant_location_name_Chutneys - Kukatpally,0.0003087973389569117
+restaurant_location_name_Truffles - Banaswadi,0.00030630884083616164
+restaurant_location_name_MTR - Koramangala,0.00030383972517335987
+restaurant_location_name_Meghana Foods - Whitefield,0.0003021864461854271
+restaurant_location_name_Vidyarthi Bhavan - Whitefield,0.0002964821124254813
+restaurant_location_name_Corner House - Whitefield,0.000295839967313788
+restaurant_location_name_Bawarchi - Abids,0.0002925950055467316
+restaurant_location_name_Pista House - Kukatpally,0.0002878015723918179
+restaurant_location_name_Karachi Bakery Cafe - Gachibowli,0.0002836750270921637
+restaurant_location_name_Mehfil - Ameerpet,0.0002812929553158789
+restaurant_location_name_Mehfil - Abids,0.00027801094654951317
+restaurant_location_name_Smoor - Malleshwaram,0.0002768893165863945
+restaurant_location_name_Karachi Bakery Cafe - Secunderabad,0.0002750672955172252
+restaurant_location_name_Paradise - Khairatabad,0.000272631795415894
+restaurant_location_name_Corner House - Koramangala,0.0002698748274324149
+restaurant_location_name_CTR - Marathahalli,0.0002679892570827278
+restaurant_location_name_Chutneys - New Maruthi Nagar,0.0002667618214245215
+restaurant_location_name_Shah Ghouse - Banjara Hills,0.0002655389570228635
+restaurant_location_name_Pista House - Ameerpet,0.0002654572407597577
+restaurant_location_name_Cream Stone - Gachibowli,0.0002632039175799825
+restaurant_location_name_Truffles - Marathahalli,0.00026106426061948306
+restaurant_location_name_Nagarjuna - Koramangala,0.0002606108235725062
+restaurant_location_name_Shah Ghouse - Ameerpet,0.00026036948346426584
+restaurant_location_name_Cream Stone - Madhapur,0.00025702911345292954
+restaurant_location_name_MTR - Banaswadi,0.0002523882856211991
+restaurant_location_name_Paradise - Gachibowli,0.00025163907062442965
+restaurant_location_name_Meridian - Secunderabad,0.00024506827159481145
+restaurant_location_name_Udupi Sri Krishna Bhavan - Malleshwaram,0.00024115052321323197
+restaurant_location_name_Bawarchi - Khairatabad,0.00023895951356503063
+restaurant_location_name_Vidyarthi Bhavan - Malleshwaram,0.00022733786383637467
+restaurant_location_name_Empire Restaurant - Malleshwaram,0.00022183900885579415
+restaurant_location_name_Ram Ki Bandi - Secunderabad,0.00021091969022248708
+restaurant_location_name_Corner House - Marathahalli,0.0002060321582391806
+receiver_type_Self,0.0
+order_for_someone_else_flag,0.0
